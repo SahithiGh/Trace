@@ -1,27 +1,32 @@
-# Hindsight integration
+# TRACE Hindsight integration
 
-TRACE uses Hindsight's three core memory operations:
+TRACE uses a single server-side Node integration for Hindsight Cloud. The browser never receives `HINDSIGHT_API_KEY`.
 
-### Retain
-`POST /v1/default/banks/{bank_id}/memories`
+## Environment
 
-The Memory Lab can seed the checkout lifecycle into the Hindsight bank as timestamped product events.
+```text
+HINDSIGHT_BASE_URL=https://api.hindsight.vectorize.io
+HINDSIGHT_API_KEY=...
+HINDSIGHT_BANK_ID=trace-demo
+```
 
-### Recall
-`POST /v1/default/banks/{bank_id}/memories/recall`
+Without credentials, TRACE uses the seeded deterministic memory dataset. This keeps the prototype demonstrable locally while making the live Hindsight path explicit when credentials are configured.
 
-TRACE sends the current product question to Hindsight and uses the returned memories as historical evidence.
+## API flow
 
-### Reflect
-`POST /v1/default/banks/{bank_id}/reflect`
+- `POST /api/v1/memory/retain`
+- `POST /api/v1/memory/recall`
+- `POST /api/v1/memory/reflect`
+- `GET /api/v1/memory/status`
+- `POST /api/v1/replay`
+- `POST /api/v1/agent/ask`
 
-TRACE can ask Hindsight to reason over the memory bank for deeper historical product questions.
+Memory Replay accepts `use_memory: false` or `use_memory: true` so the comparison is a real backend-controlled OFF/ON distinction.
 
-The current UI defaults to seeded local demo memory so the project remains runnable without credentials. When Hindsight is configured and returns memories, the Memory Lab labels the stream **LIVE HINDSIGHT**.
+## Verifying the live connection
 
-The browser never receives the Hindsight API key. `server/hindsight-server.mjs` keeps the key server-side and proxies only the required operations.
+Open `/api/v1/memory/diagnose` on your deployment. It reports whether the key is set and runs a real recall and reflect against Hindsight, with timings and a one-line verdict.
 
-Official references:
-- https://docs.hindsight.vectorize.io/retain/
-- https://docs.hindsight.vectorize.io/recall/
-- https://docs.hindsight.vectorize.io/api-reference/reflect/
+- Seeding is asynchronous: press "Seed demo + Hindsight", wait until the message says Hindsight has processed the memories (up to about a minute), then run Memory ON.
+- The reflect endpoint has no separate `context` field in the current Hindsight API, so TRACE folds context into the query.
+- `vercel.json` routes every `/api/*` request to the single `api/index.js` function.

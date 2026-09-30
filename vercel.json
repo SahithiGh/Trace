@@ -1,28 +1,7 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "services": {
-    "app": {
-      "root": ".",
-      "framework": "vite"
-    },
-    "backend": {
-      "root": "backend",
-      "framework": "fastapi",
-      "entrypoint": "app.main:app"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/api/v1/(.*)",
-      "destination": {
-        "service": "backend"
-      }
-    },
-    {
-      "source": "/(.*)",
-      "destination": {
-        "service": "app"
-      }
-    }
-  ]
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "functions": { "api/index.js": { "maxDuration": 60 } },
+  "rewrites": [ { "source": "/api/(.*)", "destination": "/api/index?path=$1" } ]
 }

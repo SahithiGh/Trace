@@ -1,60 +1,48 @@
 # TRACE — Tracking Reactions, Actions, Consequences & Evolution
 
-TRACE is a memory-powered Product Intelligence Agent. A customer review is an event; a product problem is a persistent entity that can evolve, be acted on, improve, regress and return.
+TRACE is a memory-powered Product Intelligence prototype. The submitted runtime is **Node-only**: Python is not required to install, run, build, or deploy the project. The old FastAPI implementation is not part of the active prototype.
 
-## Core demo
-
-Customer feedback → problem identity → historical context → decision → intervention → measured outcome → Hindsight memory → new feedback → possible resurrection/evolution → evidence-backed decision support.
-
-## Five hero capabilities
-
-1. Problem Resurrection Engine
-2. We Already Tried That
-3. Memory Contradiction Detector
-4. Problem Evolution Graph
-5. Memory Replay: genuinely compare a memory-free analysis with Hindsight-backed historical reasoning
-
-## Run frontend
+## Run locally
 
 ```bash
 npm install
-npm run build
 npm run dev
 ```
 
-## Run backend
+Then open `http://localhost:5173`.
+
+`npm run dev` starts both the Vite frontend and the Node API automatically. There is no second terminal and no Python dependency.
+
+## Production build
 
 ```bash
-copy backend\.env.example backend\.env
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r backend\requirements.txt
-alembic -c backend/alembic.ini upgrade head
-set PYTHONPATH=backend
-python -m app.seed.demo
-python -m uvicorn app.main:app --reload --port 8000
+npm run build
+npm run preview
 ```
-
-Or run PostgreSQL + API with `docker compose up --build`.
 
 ## Hindsight
 
-Add `HINDSIGHT_API_KEY` and `HINDSIGHT_BANK_ID` to the backend environment. TRACE uses the documented Hindsight Retain, Recall and Reflect HTTP operations. Memory OFF never calls Hindsight; Memory ON requires a configured Hindsight service.
+The app works out of the box with deterministic seeded memory so the Memory Lab and TRACE Agent are usable without credentials. For live Hindsight Cloud, set these environment variables on the server/deployment:
 
-## Data honesty
+```text
+HINDSIGHT_BASE_URL=https://api.hindsight.vectorize.io
+HINDSIGHT_API_KEY=...
+HINDSIGHT_BANK_ID=trace-demo
+```
 
-The longitudinal intervention/outcome layer is explicitly synthetic demo data. It is never presented as real customer evidence.
+The browser never receives the Hindsight API key.
 
-## Trust model
+## Deployment
 
-TRACE separates facts, inferences and hypotheses. It does not autonomously decide product strategy. Important AI-derived outputs carry confidence and evidence references.
+The project includes `vercel.json` and a catch-all Node API function under `api/[[...path]].js`. Deploying the repository to Vercel builds the Vite frontend and serves `/api/*` through the Node runtime. No Python runtime is needed.
 
-## Backend coverage added from the TRACE implementation specification
+## Demo flow
 
-The backend now includes the full longitudinal API surface: dashboard aggregation, feedback list/detail/batch ingestion, problem evolution/evidence/memory views, decision history, intervention and outcome history, resurrection, emerging-problem and decision-debt signals, contradiction detection, stale-memory detection/flagging, CSV/JSON ingestion, Memory Replay, evaluation records, demo reset/seed, and an optional API-key security layer.
+1. Sign in with any valid-looking email and a password of 6+ characters.
+2. Open **Problem Observatory** → **Mobile checkout confusion**.
+3. Review the lifecycle and previous interventions.
+4. Open **Memory Lab** → seed the demo.
+5. Run Memory OFF, then Memory ON.
+6. Open **TRACE Agent** and ask why checkout complaints returned.
 
-The evaluation catalogue defines 10 synthetic cases for each required category (recurring, successful, failed, partial, resurrection, false similarity, contradiction, evolution, unrelated, and new problem). These are clearly marked synthetic; only the seeded hero acceptance scenario is executed automatically by the built-in evaluation runner unless additional fixtures are added.
-
-### Important verification note
-
-This repository was statically syntax-checked and the final ZIP was integrity-tested. Full backend runtime tests and the frontend production build still require the project dependencies (`asyncpg`, `aiosqlite`, and the npm packages) to be installed in the target environment. No claim of a successful browser build is made from this packaging environment.
+The longitudinal data is synthetic demo data and is labelled as such in the UI.

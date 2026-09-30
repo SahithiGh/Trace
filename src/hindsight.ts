@@ -1,10 +1,9 @@
-import { postJson } from './api';
+import { postJson, readJson } from './api';
 
-export interface MemoryResult { id?: string; text: string; type?: string; mentioned_at?: string; context?: string }
-export interface HindsightResponse { configured: boolean; results?: MemoryResult[]; text?: string; based_on?: { memories?: MemoryResult[] }; message?: string }
-
-export async function reflectMemory(query: string): Promise<HindsightResponse> {
-  const r = await postJson('/api/hindsight/reflect', { query });
-  if (!r.ok) throw new Error('Memory reflect failed');
-  return r.json();
+export interface HindsightResponse { configured:boolean; text?:string; result?:unknown; }
+export async function reflectMemory(query:string):Promise<HindsightResponse>{
+  const r=await postJson('/api/v1/memory/reflect',{query,context:'TRACE historical product intelligence'});
+  const data=await readJson(r);
+  if(!r.ok) throw new Error(data?.error?.message||'Memory service unavailable');
+  return data;
 }

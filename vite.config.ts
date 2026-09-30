@@ -5,9 +5,7 @@ export default defineConfig({
   server:{
     port:5173,
     proxy:{
-      '/api/v1':'http://localhost:8000',
-      '/api/hindsight':'http://localhost:8787',
-      '/api/health':'http://localhost:8787'
+      '/api':'http://localhost:8787'
     }
   }
 });

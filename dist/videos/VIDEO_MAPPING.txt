@@ -1,8 +1,0 @@
-TRACE VIDEO MAPPING
-
-hero.mp4        = circular blue/red energy ring
-observatory.mp4 = abstract 3D data/grid surface
-memory.mp4      = futuristic glowing orb
-signals.mp4     = particle/wireframe hand
-
-The supplied Earth/planet video was intentionally omitted from the TRACE package.
