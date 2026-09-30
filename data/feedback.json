@@ -1,0 +1,58 @@
+{
+  "feedback": [
+    {
+      "id": "f1",
+      "date": "2026-09-18",
+      "channel": "App review",
+      "segment": "Mobile shoppers",
+      "problem_id": "checkout-mobile",
+      "sentiment": -0.7,
+      "text": "I keep opening different screens to find delivery and promo details before paying."
+    },
+    {
+      "id": "f2",
+      "date": "2026-09-16",
+      "channel": "Support",
+      "segment": "New customers",
+      "problem_id": "checkout-mobile",
+      "sentiment": -0.6,
+      "text": "Checkout feels like it keeps hiding the information I need."
+    },
+    {
+      "id": "f3",
+      "date": "2026-09-15",
+      "channel": "Survey",
+      "segment": "Returning customers",
+      "problem_id": "search-relevance",
+      "sentiment": 0.5,
+      "text": "Search is much better than before. Exact product names now usually appear first."
+    },
+    {
+      "id": "f4",
+      "date": "2026-09-21",
+      "channel": "Support",
+      "segment": "Tier-2 cities",
+      "problem_id": "delivery-window",
+      "sentiment": -0.8,
+      "text": "The date said Thursday, then changed after I paid. I had planned around it."
+    },
+    {
+      "id": "f5",
+      "date": "2026-09-20",
+      "channel": "App review",
+      "segment": "Gift buyers",
+      "problem_id": "gift-cards",
+      "sentiment": -0.4,
+      "text": "Gift card works until I add a promo code, then redemption fails."
+    },
+    {
+      "id": "f6",
+      "date": "2026-07-03",
+      "channel": "Survey",
+      "segment": "Subscribers",
+      "problem_id": "subscription-cancel",
+      "sentiment": 0.7,
+      "text": "Cancellation is finally easy to find and the final bill is clear."
+    }
+  ]
+}

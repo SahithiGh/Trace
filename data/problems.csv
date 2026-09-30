@@ -1,0 +1,6 @@
+id,name,feature,status,severity,first_detected,last_detected,feedback_count,sentiment,segments
+checkout-mobile,Mobile checkout confusion,Checkout,RECURRING,High,2026-01-14,2026-09-18,184,-0.62,Mobile shoppers|New customers
+search-relevance,Search result relevance,Search,IMPROVING,Medium,2026-03-02,2026-09-20,127,-0.11,Returning customers|Power users
+delivery-window,Delivery promise uncertainty,Delivery tracking,REGRESSING,High,2026-05-11,2026-09-21,96,-0.48,First-time buyers|Tier-2 cities
+subscription-cancel,Subscription cancellation friction,Account settings,RESOLVED,Medium,2026-02-10,2026-07-03,73,0.21,Subscribers
+gift-cards,Gift card redemption edge cases,Gift cards,EMERGING,Low,2026-08-28,2026-09-22,31,-0.36,Gift buyers|New customers

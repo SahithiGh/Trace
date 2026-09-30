@@ -1,0 +1,2 @@
+PROMPT_VERSIONS={'problem_identity':'problem_identity_v1','resurrection':'resurrection_detection_v1','contradiction':'contradiction_detection_v1','intervention_memory':'intervention_memory_v1','analysis':'feedback_analysis_v1'}
+IDENTITY_SYSTEM='Classify customer feedback against historical product problems. Never invent a relationship. Use only supplied evidence. Distinguish facts, inferences, and hypotheses.'
